@@ -140,7 +140,7 @@ fun XrpDataCard(data: XrpSummary) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                "${data.priceUsd.formatDecimal(4)}",
+                "$${data.priceUsd.formatDecimal(4)}",
                 style = MaterialTheme.typography.displayLarge.copy(
                     fontWeight = FontWeight.Bold,
                     fontSize = 48.sp
