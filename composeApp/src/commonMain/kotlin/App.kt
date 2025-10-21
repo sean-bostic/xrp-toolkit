@@ -64,6 +64,7 @@ fun XrpTrackerScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+
         Spacer(modifier = Modifier.height(8.dp))
 
 
@@ -84,7 +85,7 @@ fun XrpTrackerScreen() {
             }
 
             xrpData != null -> {
-                XrpDataCard(data = xrpData!!)
+                XrpDataCard(data = xrpData!!, onRefresh = { fetchData() })
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -96,21 +97,6 @@ fun XrpTrackerScreen() {
                     )
                 }
             }
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Button(
-            onClick = { fetchData() },
-            enabled = !isLoading,
-            modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .height(48.dp)
-        ) {
-            Text(
-                if (isLoading) "Loading..." else "Refresh Data",
-                fontSize = 16.sp
-            )
         }
     }
 }

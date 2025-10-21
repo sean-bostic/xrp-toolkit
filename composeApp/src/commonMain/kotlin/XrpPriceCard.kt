@@ -66,7 +66,7 @@ fun formatLargeNumber(num: Long): String {
 }
 
 @Composable
-fun XrpDataCard(data: XrpSummary) {
+fun XrpDataCard(data: XrpSummary, onRefresh: () -> Unit) {
     val changePercent = data.priceChangePercentage24h
     val trendColor = if (changePercent > 0) Color.Green else Color.Red
     Card(
@@ -252,7 +252,7 @@ fun XrpDataCard(data: XrpSummary) {
                     Spacer(modifier = Modifier.width(8.dp))
 
                     IconButton(
-                        onClick = { },
+                        onClick = { onRefresh()},
                         modifier = Modifier.size(32.dp)
                     ) {
                         Icon(
