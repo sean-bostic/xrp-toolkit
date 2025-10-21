@@ -1,11 +1,12 @@
 plugins {
     kotlin("multiplatform")
-    id("com.android.application")
+    // id("com.android.application")
     id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
 kotlin {
+    /*
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -13,7 +14,7 @@ kotlin {
             }
         }
     }
-    
+    */
     jvm("desktop")
     
     listOf(
@@ -40,11 +41,13 @@ kotlin {
             }
         }
         
+        /*
         val androidMain by getting {
             dependencies {
                 implementation("androidx.activity:activity-compose:1.8.2")
             }
         }
+         */
         
         val desktopMain by getting {
             dependencies {
@@ -54,6 +57,7 @@ kotlin {
     }
 }
 
+/*
 android {
     namespace = "com.xrptools.toolkit"
     compileSdk = 36
@@ -77,6 +81,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 }
+*/
+
 
 compose.desktop {
     application {
