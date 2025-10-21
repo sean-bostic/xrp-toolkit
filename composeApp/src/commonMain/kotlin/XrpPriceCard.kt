@@ -66,7 +66,7 @@ fun formatLargeNumber(num: Long): String {
 }
 
 @Composable
-fun XrpDataCard(data: XrpSummary, onRefresh: () -> Unit) {
+fun XrpDataCard(data: XrpSummary, onRefresh: () -> Unit, lastUpdated: String) {
     val changePercent = data.priceChangePercentage24h
     val trendColor = if (changePercent > 0) Color.Green else Color.Red
     Card(
@@ -222,7 +222,7 @@ fun XrpDataCard(data: XrpSummary, onRefresh: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Last updated 8 min, 25 sec ago..",
+                    text = "Last updated $lastUpdated",
                     color = defaultColor,
                     style = MaterialTheme.typography.bodyMedium.copy(
                         fontWeight = FontWeight.SemiBold,
