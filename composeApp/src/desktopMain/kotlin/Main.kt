@@ -10,7 +10,7 @@ fun main() = application {
         title = "XRP Pricer",
         state = rememberWindowState(
             width = 600.dp,
-            height = 340.dp
+            height = 360.dp
         )
     ) {
         window.rootPane.putClientProperty("apple.awt.transparentTitleBar", true)

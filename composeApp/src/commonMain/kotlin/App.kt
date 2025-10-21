@@ -19,6 +19,7 @@ fun App() {
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Black)
+                .statusBarsPadding()
         ){
             XrpTrackerScreen()
         }

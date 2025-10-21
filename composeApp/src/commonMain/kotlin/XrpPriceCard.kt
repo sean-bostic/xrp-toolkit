@@ -78,6 +78,7 @@ fun XrpDataCard(data: XrpSummary, onRefresh: () -> Unit, lastUpdated: String) {
             containerColor = Color.Black
         )
     ) {
+        Spacer(modifier = Modifier.height(20.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
