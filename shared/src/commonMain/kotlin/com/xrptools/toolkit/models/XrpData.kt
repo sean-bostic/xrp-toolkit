@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CoinGeckoResponse(
-    @SerialName("market_data") val marketData: MarketData
+    @SerialName("market_data") val marketData: MarketData,
 )
 
 @Serializable
@@ -15,7 +15,7 @@ data class MarketData(
     @SerialName("market_cap") val marketCap: Map<String, Long>,
     @SerialName("total_volume") val totalVolume: Map<String, Long>,
     @SerialName("high_24h") val high24h: Map<String, Double>,
-    @SerialName("low_24h") val low24h: Map<String, Double>
+    @SerialName("low_24h") val low24h: Map<String, Double>,
 )
 
 data class XrpSummary(
@@ -24,5 +24,5 @@ data class XrpSummary(
     val marketCapUsd: Long,
     val volume24hUsd: Long,
     val high24hUsd: Double,
-    val low24hUsd: Double
+    val low24hUsd: Double,
 )

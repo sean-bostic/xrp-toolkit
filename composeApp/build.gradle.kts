@@ -3,6 +3,7 @@ plugins {
     // id("com.android.application")
     id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 kotlin {
@@ -14,20 +15,20 @@ kotlin {
             }
         }
     }
-    */
+     */
     jvm("desktop")
-    
+
     listOf(
         iosX64(),
         iosArm64(),
-        iosSimulatorArm64()
+        iosSimulatorArm64(),
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
         }
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -40,7 +41,7 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
             }
         }
-        
+
         /*
         val androidMain by getting {
             dependencies {
@@ -48,7 +49,7 @@ kotlin {
             }
         }
          */
-        
+
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
@@ -82,7 +83,6 @@ android {
     }
 }
 */
-
 
 compose.desktop {
     application {
