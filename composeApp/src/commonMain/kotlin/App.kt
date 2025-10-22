@@ -17,11 +17,12 @@ import kotlinx.coroutines.launch
 fun App() {
     MaterialTheme {
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black)
-                .statusBarsPadding()
-        ){
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .background(Color.Black)
+                    .statusBarsPadding(),
+        ) {
             XrpTrackerScreen()
         }
     }
@@ -65,7 +66,7 @@ fun XrpTrackerScreen() {
         if (autoUpdateEnabled) {
             while (true) {
                 secondsUntilUpdate = 60
-                repeat(60){
+                repeat(60) {
                     delay(1000)
                     secondsUntilUpdate--
                 }
@@ -78,7 +79,7 @@ fun XrpTrackerScreen() {
         isLoading -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 CircularProgressIndicator(color = defaultColor)
             }
@@ -94,42 +95,49 @@ fun XrpTrackerScreen() {
                 onRefresh = { fetchData() },
                 lastUpdated = lastUpdated,
                 autoUpdateEnabled = autoUpdateEnabled,
-                onAutoUpdateToggle = {autoUpdateEnabled = it },
-                secondsUntilUpdate = secondsUntilUpdate
+                onAutoUpdateToggle = { autoUpdateEnabled = it },
+                secondsUntilUpdate = secondsUntilUpdate,
             )
         }
     }
 }
 
 @Composable
-fun ErrorCard(error: String, onRetry: () -> Unit) {
+fun ErrorCard(
+    error: String,
+    onRetry: () -> Unit,
+) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.errorContainer
-        )
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.errorContainer,
+            ),
     ) {
         Column(
-            modifier = Modifier
-                .padding(24.dp)
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier =
+                Modifier
+                    .padding(24.dp)
+                    .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 "⚠️",
-                fontSize = 48.sp
+                fontSize = 48.sp,
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
                 "Error Loading Data",
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold
-                ),
-                color = MaterialTheme.colorScheme.onErrorContainer
+                style =
+                    MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold,
+                    ),
+                color = MaterialTheme.colorScheme.onErrorContainer,
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -137,16 +145,17 @@ fun ErrorCard(error: String, onRetry: () -> Unit) {
             Text(
                 error,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onErrorContainer
+                color = MaterialTheme.colorScheme.onErrorContainer,
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 onClick = onRetry,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.error
-                )
+                colors =
+                    ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.error,
+                    ),
             ) {
                 Text("Try Again")
             }
