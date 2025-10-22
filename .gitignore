@@ -62,7 +62,6 @@ $RECYCLE.BIN/
 *.apk
 *.aab
 *.dex
-local.properties
 captures/
 .externalNativeBuild
 .cxx
@@ -90,6 +89,7 @@ Podfile.lock
 *.klib
 *.def
 *.framework
+.kotlin
 
 # Compose Resources
 **/build/generated/
@@ -125,3 +125,4 @@ test-reports/
 
 # Cache
 .cache/
+/.kotlin/

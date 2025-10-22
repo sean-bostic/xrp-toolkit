@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xrptools.toolkit.XrpClient
 import com.xrptools.toolkit.models.XrpSummary
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -32,6 +33,7 @@ fun XrpTrackerScreen() {
     var isLoading by remember { mutableStateOf(true) }
     var error by remember { mutableStateOf<String?>(null) }
     var lastUpdated by remember { mutableStateOf("") }
+    var autoUpdateEnabled by remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
     val client = remember { XrpClient() }
@@ -58,6 +60,15 @@ fun XrpTrackerScreen() {
         fetchData()
     }
 
+    LaunchedEffect(autoUpdateEnabled) {
+        if (autoUpdateEnabled) {
+            while (true) {
+                delay(60000)
+                fetchData()
+            }
+        }
+    }
+
     when {
         isLoading -> {
             Box(
@@ -76,7 +87,9 @@ fun XrpTrackerScreen() {
             XrpDataCard(
                 data = xrpData!!,
                 onRefresh = { fetchData() },
-                lastUpdated = lastUpdated
+                lastUpdated = lastUpdated,
+                autoUpdateEnabled = autoUpdateEnabled,
+                onAutoUpdateToggle = {autoUpdateEnabled = it }
             )
         }
     }

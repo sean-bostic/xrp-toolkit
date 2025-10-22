@@ -1,3 +1,4 @@
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +24,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
@@ -66,7 +68,13 @@ fun formatLargeNumber(num: Long): String {
 }
 
 @Composable
-fun XrpDataCard(data: XrpSummary, onRefresh: () -> Unit, lastUpdated: String) {
+fun XrpDataCard(
+    data: XrpSummary,
+    onRefresh: () -> Unit,
+    lastUpdated: String,
+    autoUpdateEnabled: Boolean,
+    onAutoUpdateToggle: (Boolean) -> Unit,
+) {
     val changePercent = data.priceChangePercentage24h
     val trendColor = if (changePercent > 0) Color.Green else Color.Red
     Card(
@@ -245,23 +253,30 @@ fun XrpDataCard(data: XrpSummary, onRefresh: () -> Unit, lastUpdated: String) {
                     Spacer(modifier = Modifier.width(4.dp))
 
                     Switch(
-                        checked = false,
-                        onCheckedChange = { },
-                        modifier = Modifier.scale(0.8f)
+                        checked = autoUpdateEnabled,
+                        onCheckedChange = onAutoUpdateToggle,
+                        modifier = Modifier.scale(0.8f),
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = Color.White,
+                            checkedTrackColor = Color.Green
+                        )
                     )
 
                     Spacer(modifier = Modifier.width(8.dp))
-
-                    IconButton(
-                        onClick = { onRefresh()},
-                        modifier = Modifier.size(32.dp)
+                    AnimatedVisibility(
+                        visible = !autoUpdateEnabled,
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.Refresh,
-                            contentDescription = "Refresh",
-                            tint = defaultColor,
-                            modifier = Modifier.size(20.dp)
-                        )
+                        IconButton(
+                            onClick = { onRefresh()},
+                            modifier = Modifier.size(32.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Refresh,
+                                contentDescription = "Refresh",
+                                tint = defaultColor,
+                                modifier = Modifier.size(20.dp)
+                            )
+                        }
                     }
                 }
             }
