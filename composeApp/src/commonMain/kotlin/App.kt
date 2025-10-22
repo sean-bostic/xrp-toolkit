@@ -34,16 +34,17 @@ fun XrpTrackerScreen() {
     var error by remember { mutableStateOf<String?>(null) }
     var lastUpdated by remember { mutableStateOf("") }
     var autoUpdateEnabled by remember { mutableStateOf(false) }
+    var secondsUntilUpdate by remember { mutableStateOf(60) }
 
-    val scope = rememberCoroutineScope()
-    val client = remember { XrpClient() }
+    val coroutineScope = rememberCoroutineScope()
+    val xrpClient = remember { XrpClient() }
 
     fun fetchData() {
-        scope.launch {
+        coroutineScope.launch {
             isLoading = true
             error = null
 
-            client.getXrpData()
+            xrpClient.getXrpData()
                 .onSuccess {
                     xrpData = it
                     lastUpdated = getCurrentTime()
@@ -63,7 +64,11 @@ fun XrpTrackerScreen() {
     LaunchedEffect(autoUpdateEnabled) {
         if (autoUpdateEnabled) {
             while (true) {
-                delay(60000)
+                secondsUntilUpdate = 60
+                repeat(60){
+                    delay(1000)
+                    secondsUntilUpdate--
+                }
                 fetchData()
             }
         }
@@ -89,7 +94,8 @@ fun XrpTrackerScreen() {
                 onRefresh = { fetchData() },
                 lastUpdated = lastUpdated,
                 autoUpdateEnabled = autoUpdateEnabled,
-                onAutoUpdateToggle = {autoUpdateEnabled = it }
+                onAutoUpdateToggle = {autoUpdateEnabled = it },
+                secondsUntilUpdate = secondsUntilUpdate
             )
         }
     }

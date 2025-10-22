@@ -74,6 +74,7 @@ fun XrpDataCard(
     lastUpdated: String,
     autoUpdateEnabled: Boolean,
     onAutoUpdateToggle: (Boolean) -> Unit,
+    secondsUntilUpdate: Int
 ) {
     val changePercent = data.priceChangePercentage24h
     val trendColor = if (changePercent > 0) Color.Green else Color.Red
@@ -230,14 +231,26 @@ fun XrpDataCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "Last updated $lastUpdated",
-                    color = defaultColor,
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 10.sp
+
+                if (autoUpdateEnabled) {
+                    Text(
+                        text = "Next update in $secondsUntilUpdate",
+                        color = defaultColor,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 10.sp
+                        )
                     )
-                )
+                } else {
+                    Text(
+                        text = "Last updated $lastUpdated",
+                        color = defaultColor,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 10.sp
+                        )
+                    )
+                }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End
