@@ -34,7 +34,7 @@ fun XrpTrackerScreen() {
     var isLoading by remember { mutableStateOf(true) }
     var error by remember { mutableStateOf<String?>(null) }
     var lastUpdated by remember { mutableStateOf("") }
-    var autoUpdateEnabled by remember { mutableStateOf(false) }
+    var autoUpdateEnabled by remember { mutableStateOf(true) }
     var secondsUntilUpdate by remember { mutableStateOf(60) }
 
     val coroutineScope = rememberCoroutineScope()
